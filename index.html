@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="W SERVICE">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#EFE7D8">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>Registro Giornate — W SERVICE</title>
+<style>
+  :root{
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    --font-mono: 'SF Mono', ui-monospace, Menlo, Consolas, 'Courier New', monospace;
+    --font-body: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --paper:#EFE7D8;
+    --card:#F8F3E8;
+    --ink:#2B2420;
+    --ink-soft:#7A6F5E;
+    --rule:#CBBB9B;
+    --rule-soft:#DED2B8;
+    --credit:#3F6B4F;
+    --credit-bg:#E3EADD;
+    --debit:#A3402A;
+    --debit-bg:#F1DCD1;
+    --brass:#AD7F3C;
+    --brass-bg:#EFE0BE;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    min-height:100vh;
+    padding-bottom:88px;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:0 16px;}
+
+  header.top{
+    padding:22px 16px 14px;
+    max-width:520px;margin:0 auto;
+    border-bottom:2px solid var(--ink);
+  }
+  header.top .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  header.top h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:26px;
+    margin:2px 0 0;
+  }
+  header.top .sub{
+    font-family:var(--font-display);font-style:italic;
+    color:var(--ink-soft);font-size:14px;margin-top:2px;
+  }
+
+  .totals-strip{ display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 18px; }
+  .tot-card{ flex:1 1 calc(50% - 5px); min-width:0; background:var(--card); border:1px solid var(--rule); border-radius:4px; padding:10px 12px; }
+  .tot-card .lbl{ font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .tot-card .val{ font-family:var(--font-mono); font-weight:700; font-size:16px; margin-top:3px; }
+  .tot-card.credit .val{ color:var(--credit); }
+  .tot-card.debit .val{ color:var(--debit); }
+  .tot-card.margin .val{ color:var(--brass); }
+
+  h2.section-title{
+    font-family:var(--font-display); font-weight:700; font-size:19px;
+    margin:22px 0 10px; display:flex; align-items:baseline; gap:8px;
+  }
+  h2.section-title .count{ font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); font-weight:400; }
+
+  .card{ background:var(--card); border:1px solid var(--rule); border-radius:6px; padding:14px; margin-bottom:10px; }
+
+  label{
+    display:block; font-family:var(--font-mono); font-size:11px;
+    letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft);
+    margin:14px 0 5px;
+  }
+  label:first-child{ margin-top:0; }
+  input[type=text],input[type=number],input[type=date],textarea{
+    width:100%; font-family:var(--font-body); font-size:16px;
+    padding:10px 11px; border:1px solid var(--rule); border-radius:5px;
+    background:#fff; color:var(--ink);
+  }
+  input:focus,textarea:focus{ outline:2px solid var(--brass); outline-offset:1px; }
+  textarea{ resize:vertical; min-height:50px; }
+
+  .persona-group{ margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--rule-soft); }
+  .persona-group:last-child{ border-bottom:none; }
+  .persona-entry{
+    display:flex; gap:8px; align-items:center;
+  }
+  .persona-entry input[type=text]{ flex:1.4; }
+  .persona-entry input[type=number]{ flex:1; text-align:right; font-family:var(--font-mono); }
+  .persona-entry .rm-btn{
+    flex:0 0 auto; background:none; border:none; color:var(--debit);
+    font-size:22px; padding:2px 6px; cursor:pointer; line-height:1;
+  }
+  .persona-hint{
+    font-family:var(--font-mono); font-size:11px; color:var(--ink-soft);
+    text-align:right; margin-top:3px; min-height:14px;
+  }
+  .persona-hint .amt{ color:var(--debit); font-weight:600; }
+
+  .persona-pagato{
+    display:flex; align-items:center; justify-content:flex-end; gap:6px;
+    margin-top:6px; font-family:var(--font-mono); font-size:12px; color:var(--ink-soft);
+  }
+  .persona-pagato input{ width:16px; height:16px; accent-color:var(--credit); }
+
+  .badge-pag{
+    display:inline-block; font-family:var(--font-mono); font-size:10px;
+    letter-spacing:.04em; text-transform:uppercase; padding:2px 7px;
+    border-radius:10px; margin-top:4px;
+  }
+  .badge-pag.cash{ background:var(--brass-bg); color:var(--brass); }
+  .badge-pag.fattura{ background:var(--credit-bg); color:var(--credit); }
+
+  .pay-toggle{
+    font-family:var(--font-mono); font-size:11px; padding:4px 9px;
+    border-radius:12px; border:1px solid var(--rule); background:#fff;
+    color:var(--ink-soft); cursor:pointer;
+  }
+  .pay-toggle.paid{ background:var(--credit-bg); border-color:var(--credit); color:var(--credit); }
+  .pay-toggle.unpaid{ background:var(--debit-bg); border-color:var(--debit); color:var(--debit); }
+
+  .btn-primary{
+    width:100%; background:var(--ink); color:var(--card); border:none;
+    border-radius:6px; padding:14px; font-family:var(--font-display); font-weight:700;
+    font-size:16px; margin-top:20px; cursor:pointer;
+  }
+  .btn-primary:active{ opacity:.85; }
+  .btn-secondary{
+    width:100%; background:none; border:1.5px dashed var(--rule); color:var(--ink-soft);
+    border-radius:6px; padding:11px; font-family:var(--font-mono); font-size:13px;
+    margin-top:6px; cursor:pointer;
+  }
+  .btn-cancel{
+    width:100%; background:none; border:1px solid var(--rule); color:var(--ink-soft);
+    border-radius:6px; padding:11px; font-family:var(--font-mono); font-size:13px;
+    margin-top:8px; cursor:pointer;
+  }
+
+  .msg-empty{
+    font-family:var(--font-display); font-style:italic; color:var(--ink-soft);
+    text-align:center; padding:30px 10px; font-size:15px;
+  }
+
+  .giorno-card{ background:var(--card); border:1px solid var(--rule); border-radius:6px; margin-bottom:10px; overflow:hidden; }
+  .giorno-head{ display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; }
+  .giorno-day{ font-family:var(--font-mono); font-weight:700; font-size:12px; background:var(--ink); color:var(--card); border-radius:4px; padding:4px 7px; flex:0 0 auto; white-space:nowrap; }
+  .giorno-info{ flex:1; min-width:0; }
+  .giorno-info .cli{ font-family:var(--font-display); font-weight:700; font-size:15.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .giorno-info .meta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); margin-top:1px; }
+  .giorno-amt{ text-align:right; flex:0 0 auto; }
+  .giorno-amt .imp{ font-family:var(--font-mono); font-weight:700; font-size:15px; color:var(--credit); }
+  .giorno-amt .margine{ font-family:var(--font-mono); font-size:11px; color:var(--brass); }
+  .giorno-detail{ padding:0 14px 14px; border-top:1px dashed var(--rule); display:none; }
+  .giorno-detail.open{ display:block; }
+  .giorno-detail .dline{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:13px; padding:6px 0; border-bottom:1px solid var(--rule-soft); }
+  .giorno-detail .dline:last-of-type{ border-bottom:none; }
+  .giorno-actions{ display:flex; gap:8px; margin-top:12px; }
+  .giorno-actions button{ flex:1; font-family:var(--font-mono); font-size:12px; padding:8px; border-radius:5px; cursor:pointer; }
+  .btn-del{ background:var(--debit-bg); color:var(--debit); border:1px solid var(--debit); }
+  .btn-edit{ background:var(--brass-bg); color:var(--brass); border:1px solid var(--brass); }
+
+  .ledger-entity{ background:var(--card); border:1px solid var(--rule); border-radius:6px; margin-bottom:10px; overflow:hidden; }
+  .ledger-entity-head{ display:flex; justify-content:space-between; align-items:center; padding:13px 14px; cursor:pointer; }
+  .ledger-entity-head .en-name{ font-family:var(--font-display); font-weight:700; font-size:16px; }
+  .ledger-entity-head .en-sub{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); }
+  .ledger-entity-head .en-amt{ font-family:var(--font-mono); font-weight:700; font-size:17px; }
+  .en-amt.c{ color:var(--credit); }
+  .en-amt.d{ color:var(--debit); }
+  .en-amt.m{ color:var(--brass); }
+  .ledger-entity-body{ padding:0 14px 12px; border-top:1px dashed var(--rule); display:none; }
+  .ledger-entity-body.open{ display:block; }
+  .ledger-entity-body .eline{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:12.5px; padding:7px 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-soft); }
+  .ledger-entity-body .eline:last-child{ border-bottom:none; }
+  .ledger-entity-body .eline .d1{ color:var(--ink); }
+
+  .filter-row{ margin-bottom:14px; }
+  select{
+    width:100%; font-family:var(--font-body); font-size:15px; padding:10px 11px;
+    border:1px solid var(--rule); border-radius:5px; background:#fff; color:var(--ink);
+    -webkit-appearance:none; appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%232B2420' stroke-width='1.5' fill='none'/></svg>");
+    background-repeat:no-repeat; background-position:right 12px center; padding-right:32px;
+  }
+
+  .view-toggle{ display:flex; gap:8px; margin-bottom:16px; }
+  .view-toggle button{
+    flex:1; font-family:var(--font-mono); font-size:12px; padding:10px 4px;
+    border:1px solid var(--ink); border-radius:5px; background:none; color:var(--ink); cursor:pointer;
+  }
+  .view-toggle button.active{ background:var(--ink); color:var(--card); }
+
+  nav.tabbar{
+    position:fixed; bottom:0; left:0; right:0;
+    background:var(--card); border-top:2px solid var(--ink);
+    display:flex; max-width:520px; margin:0 auto;
+  }
+  nav.tabbar button{
+    flex:1; background:none; border:none; padding:11px 4px 9px;
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:.02em;
+    color:var(--ink-soft); cursor:pointer; display:flex; flex-direction:column;
+    align-items:center; gap:3px; text-transform:uppercase;
+  }
+  nav.tabbar button .ic{ font-size:18px; }
+  nav.tabbar button.active{ color:var(--ink); font-weight:700; }
+
+  .toast{
+    position:fixed; top:14px; left:50%; transform:translateX(-50%);
+    background:var(--ink); color:var(--card); padding:9px 18px; border-radius:20px;
+    font-family:var(--font-mono); font-size:12.5px; opacity:0;
+    transition:opacity .25s; pointer-events:none; z-index:99; max-width:88%; text-align:center;
+  }
+  .toast.show{ opacity:1; }
+
+  #error-banner{
+    display:none;
+    background:var(--debit-bg); border:1px solid var(--debit); color:var(--debit);
+    font-family:var(--font-mono); font-size:12px; padding:10px 14px; border-radius:5px;
+    margin:14px auto 0; cursor:pointer;
+  }
+  .editing-banner{
+    background:var(--brass-bg); border:1px solid var(--brass); color:var(--brass);
+    font-family:var(--font-mono); font-size:12px; padding:9px 12px; border-radius:5px; margin-bottom:14px;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">W SERVICE &middot; Ghirello Walter</div>
+  <h1>Registro Giornate</h1>
+  <div class="sub">entrate clienti &amp; uscite squadra</div>
+</header>
+
+<div id="error-banner" class="wrap"></div>
+<div class="wrap" id="totals-strip-wrap"></div>
+<div class="wrap" id="content"></div>
+<div class="toast" id="toast"></div>
+
+<nav class="tabbar">
+  <button data-tab="nuova"><span class="ic">&#9998;</span>Nuova</button>
+  <button data-tab="giornate"><span class="ic">&#9638;</span>Giornate</button>
+  <button data-tab="riepilogo"><span class="ic">&Sigma;</span>Riepilogo</button>
+</nav>
+
+<script>
+"use strict";
+
+var STORAGE_KEY = "wservice_registro_giornate_v2";
+try{ if(navigator.storage && navigator.storage.persist){ navigator.storage.persist(); } }catch(e){}
+var BACKUP_KEY = "wservice_ultimo_backup";
+var giornate = [];
+var storageOk = true;
+
+function loadData(){
+  try{
+    var raw = window.localStorage.getItem(STORAGE_KEY);
+    if(raw){ giornate = JSON.parse(raw) || []; }
+  }catch(e){
+    storageOk = false;
+    console.warn("Salvataggio locale non disponibile:", e);
+  }
+}
+function saveData(){
+  try{
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(giornate));
+  }catch(e){
+    storageOk = false;
+    console.warn("Impossibile salvare:", e);
+    showToast("Attenzione: impossibile salvare i dati su questo dispositivo");
+  }
+  cloudPush();
+}
+
+/* ---------------- SALVATAGGIO NEL CLOUD (account Claude) ---------------- */
+var cloud = null, cloudYears = {}, cloudTimer = null, cloudWarned = false;
+
+function cloudYear(g){ return String(g.data||"").slice(0,4) || "0000"; }
+
+function cloudPush(){
+  if(!cloud) return;
+  clearTimeout(cloudTimer);
+  cloudTimer = setTimeout(function(){
+    var perAnno = {};
+    giornate.forEach(function(g){
+      var y = cloudYear(g);
+      (perAnno[y] = perAnno[y] || []).push(g);
+    });
+    Object.keys(cloudYears).forEach(function(y){ if(!perAnno[y]) perAnno[y] = []; });
+    var jobs = Object.keys(perAnno).map(function(y){
+      cloudYears[y] = true;
+      return cloud.doc("anno-" + y).set({ giornate: perAnno[y] });
+    });
+    Promise.all(jobs).catch(function(e){
+      console.warn("Cloud non raggiungibile:", e);
+      if(!cloudWarned){ cloudWarned = true; showToast("Salvato solo su questo telefono (cloud non raggiungibile)"); }
+    });
+  }, 500);
+}
+
+function cloudInit(){
+  if(!window.claude || !window.claude.use) return;
+  Promise.all([window.claude.use("db"), window.claude.use("user")]).then(function(r){
+    var db = r[0], user = r[1];
+    if(!db || !user) return null;
+    return user.id().then(function(id){
+      if(!id) return null;
+      var col = db.collection("data/users/" + id);
+      return col.get().then(function(snap){
+        cloud = col;
+        if(snap.empty){
+          if(giornate.length){ cloudPush(); showToast("Dati copiati nel cloud \u2713"); }
+          return;
+        }
+        var remote = [];
+        snap.docs.forEach(function(d){
+          var dat = d.data() || {};
+          cloudYears[d.id.replace("anno-","")] = true;
+          (dat.giornate || []).forEach(function(g){ remote.push(g); });
+        });
+        giornate = remote;
+        try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(giornate)); }catch(e){}
+        renderTab(CURRENT_TAB);
+        showToast("Dati sincronizzati \u2713");
+      });
+    });
+  }).catch(function(e){ console.warn("Cloud non disponibile:", e); });
+}
+
+var CURRENT_TAB = "nuova";
+var editingId = null;
+var formPersone = [{nome:"", costo:"", pagato:false}];
+var formData = "";
+var formCliente = "";
+var formImporto = "";
+var formNote = "";
+var formPagamento = "";
+
+var openGiornoId = null;
+var RIEPILOGO_MESE = "tutti";
+var openLedgerId = null;
+
+var $content = document.getElementById("content");
+var $totalsWrap = document.getElementById("totals-strip-wrap");
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function eur(n){
+  n = n || 0;
+  return (Math.round(n*100)/100).toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function todayISO(){
+  var d = new Date();
+  var m = String(d.getMonth()+1).padStart(2,"0");
+  var day = String(d.getDate()).padStart(2,"0");
+  return d.getFullYear()+"-"+m+"-"+day;
+}
+function fmtDate(iso){
+  var d = new Date(iso+"T00:00:00");
+  return d.toLocaleDateString("it-IT",{day:"2-digit",month:"short",year:"numeric"});
+}
+function fmtDateShort(iso){
+  var d = new Date(iso+"T00:00:00");
+  return d.toLocaleDateString("it-IT",{day:"2-digit",month:"2-digit"});
+}
+function monthKey(iso){ return iso.slice(0,7); }
+function monthLabel(key){
+  var parts = key.split("-");
+  var d = new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, 1);
+  var s = d.toLocaleDateString("it-IT",{month:"long",year:"numeric"});
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function showToast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 1800);
+}
+
+function showErrorBanner(msg){
+  var b = document.getElementById("error-banner");
+  if(!b) return;
+  b.textContent = "Si e' verificato un problema: " + msg + " (tocca per chiudere)";
+  b.style.display = "block";
+}
+function reportError(err){
+  console.error(err);
+  showErrorBanner(err && err.message ? err.message : String(err));
+}
+function on(el, evt, fn){
+  if(!el){ reportError({message:"elemento mancante per evento " + evt}); return; }
+  el.addEventListener(evt, function(e){
+    try{ fn(e); }
+    catch(err){ reportError(err); }
+  });
+}
+function escapeHtml(s){
+  s = (s===undefined || s===null) ? "" : String(s);
+  return s.replace(/[&<>"']/g, function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m];
+  });
+}
+
+function giornoCosti(g){
+  var tot = 0;
+  (g.persone||[]).forEach(function(p){ tot += (p.costo||0); });
+  return tot;
+}
+function giornoMargine(g){ return (g.importoCliente||0) - giornoCosti(g); }
+function giornoNonPagato(g){
+  var tot = 0;
+  (g.persone||[]).forEach(function(p){ if(!p.pagato) tot += (p.costo||0); });
+  return tot;
+}
+function pagamentoLabel(v){
+  if(v==="cash") return "Cash";
+  if(v==="fattura") return "Fattura";
+  return "";
+}
+
+function listaClientiStorici(){
+  var set = {};
+  giornate.forEach(function(g){ if(g.cliente) set[g.cliente]=true; });
+  return Object.keys(set).sort();
+}
+function listaPersoneStoriche(){
+  var set = {};
+  giornate.forEach(function(g){
+    (g.persone||[]).forEach(function(p){ if(p.nome) set[p.nome]=true; });
+  });
+  return Object.keys(set).sort();
+}
+
+function renderTotalsStrip(){
+  var totCredit = 0, totDebit = 0, totNonPagato = 0;
+  giornate.forEach(function(g){
+    totCredit += (g.importoCliente||0);
+    totDebit += giornoCosti(g);
+    totNonPagato += giornoNonPagato(g);
+  });
+  var margine = totCredit - totDebit;
+  $totalsWrap.innerHTML =
+    '<div class="totals-strip">' +
+      '<div class="tot-card credit"><div class="lbl">Da clienti</div><div class="val">&euro; ' + eur(totCredit) + '</div></div>' +
+      '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(totDebit) + '</div></div>' +
+      '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(totNonPagato) + '</div></div>' +
+      '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(margine) + '</div></div>' +
+    '</div>';
+}
+
+function personaTotaleStorico(nome){
+  if(!nome) return 0;
+  var key = nome.trim().toLowerCase();
+  if(!key) return 0;
+  var tot = 0;
+  giornate.forEach(function(g){
+    if(editingId && g.id===editingId) return;
+    (g.persone||[]).forEach(function(p){
+      if((p.nome||"").trim().toLowerCase()===key) tot += (p.costo||0);
+    });
+  });
+  return tot;
+}
+
+/* ---------------- NUOVA GIORNATA ---------------- */
+function resetForm(){
+  editingId = null;
+  formData = todayISO();
+  formCliente = "";
+  formImporto = "";
+  formNote = "";
+  formPagamento = "";
+  formPersone = [{nome:"", costo:"", pagato:false}];
+}
+
+function loadGiornoIntoForm(g){
+  editingId = g.id;
+  formData = g.data;
+  formCliente = g.cliente;
+  formImporto = String(g.importoCliente);
+  formNote = g.note || "";
+  formPagamento = g.pagamentoCliente || "";
+  formPersone = (g.persone||[]).map(function(p){ return {nome:p.nome, costo:String(p.costo), pagato:!!p.pagato}; });
+  if(formPersone.length===0) formPersone = [{nome:"",costo:"",pagato:false}];
+}
+
+function updatePersonaHint(idx){
+  var p = formPersone[idx];
+  var hintEl = document.getElementById("hint-" + idx);
+  if(!p || !hintEl) return;
+  var storico = personaTotaleStorico(p.nome);
+  var oggi = parseFloat(p.costo) || 0;
+  if(!p.nome.trim()){
+    hintEl.innerHTML = "";
+  } else if(storico>0){
+    hintEl.innerHTML = 'Gia\' maturato: &euro; ' + eur(storico) + ' &middot; con oggi: <span class="amt">&euro; ' + eur(storico+oggi) + '</span>';
+  } else {
+    hintEl.innerHTML = 'Prima giornata registrata per questa persona';
+  }
+}
+
+function renderNuova(){
+  var personeRows = formPersone.map(function(p, i){
+    var storico = personaTotaleStorico(p.nome);
+    var oggi = parseFloat(p.costo) || 0;
+    var hintText = p.nome.trim()
+      ? (storico>0
+          ? 'Gia\' maturato: &euro; ' + eur(storico) + ' &middot; con oggi: <span class="amt">&euro; ' + eur(storico+oggi) + '</span>'
+          : 'Prima giornata registrata per questa persona')
+      : "";
+    return '' +
+      '<div class="persona-group">' +
+        '<div class="persona-entry">' +
+          '<input type="text" placeholder="Nome persona" autocomplete="off" autocapitalize="words" data-idx="' + i + '" class="f-persona-nome" value="' + escapeHtml(p.nome) + '">' +
+          '<input type="number" inputmode="decimal" step="0.01" placeholder="Costo &euro;" data-idx="' + i + '" class="f-persona-costo" value="' + escapeHtml(p.costo) + '">' +
+          '<button class="rm-btn" data-rm="' + i + '" title="Rimuovi">&times;</button>' +
+        '</div>' +
+        '<label class="persona-pagato"><input type="checkbox" data-idx="' + i + '" class="f-persona-pagato"' + (p.pagato ? ' checked' : '') + '> Gi\u00e0 pagato</label>' +
+        '<div class="persona-hint" id="hint-' + i + '">' + hintText + '</div>' +
+      '</div>';
+  }).join("");
+
+  var editingBanner = editingId ? '<div class="editing-banner">Stai modificando una giornata esistente</div>' : "";
+
+  $content.innerHTML =
+    editingBanner +
+    '<div class="card">' +
+      '<label>Data</label>' +
+      '<input type="date" id="f-data" value="' + formData + '">' +
+
+      '<label>Cliente</label>' +
+      '<input type="text" id="f-cliente" placeholder="Nome cliente" autocomplete="off" autocapitalize="words" value="' + escapeHtml(formCliente) + '">' +
+
+      '<label>Importo pattuito con il cliente (&euro;)</label>' +
+      '<input type="number" inputmode="decimal" step="0.01" id="f-importo" placeholder="0.00" value="' + escapeHtml(formImporto) + '">' +
+
+      '<label>Come paga il cliente</label>' +
+      '<select id="f-pagamento">' +
+        '<option value=""' + (formPagamento===""?' selected':'') + '>Da definire</option>' +
+        '<option value="cash"' + (formPagamento==="cash"?' selected':'') + '>Cash</option>' +
+        '<option value="fattura"' + (formPagamento==="fattura"?' selected':'') + '>Fattura</option>' +
+      '</select>' +
+
+      '<label>Persone mandate a lavorare</label>' +
+      '<div id="persone-rows">' + personeRows + '</div>' +
+      '<button class="btn-secondary" id="btn-add-row">+ Aggiungi persona</button>' +
+
+      '<label>Note (opzionale)</label>' +
+      '<textarea id="f-note" placeholder="es. montaggio cucina, 2&deg; piano senza ascensore&hellip;">' + escapeHtml(formNote) + '</textarea>' +
+
+      '<button class="btn-primary" id="btn-salva-giorno">' + (editingId ? "Aggiorna giornata" : "Registra giornata") + '</button>' +
+      (editingId ? '<button class="btn-cancel" id="btn-annulla-edit">Annulla modifica</button>' : "") +
+    '</div>';
+
+  on(document.getElementById("f-data"), "input", function(e){ formData = e.target.value; });
+  on(document.getElementById("f-cliente"), "input", function(e){ formCliente = e.target.value; });
+  on(document.getElementById("f-importo"), "input", function(e){ formImporto = e.target.value; });
+  on(document.getElementById("f-pagamento"), "change", function(e){ formPagamento = e.target.value; });
+  on(document.getElementById("f-note"), "input", function(e){ formNote = e.target.value; });
+
+  document.querySelectorAll(".f-persona-nome").forEach(function(inp){
+    on(inp, "input", function(){
+      var idx = parseInt(inp.dataset.idx,10);
+      formPersone[idx].nome = inp.value;
+      updatePersonaHint(idx);
+    });
+  });
+  document.querySelectorAll(".f-persona-costo").forEach(function(inp){
+    on(inp, "input", function(){
+      var idx = parseInt(inp.dataset.idx,10);
+      formPersone[idx].costo = inp.value;
+      updatePersonaHint(idx);
+    });
+  });
+  document.querySelectorAll(".f-persona-pagato").forEach(function(inp){
+    on(inp, "change", function(){
+      var idx = parseInt(inp.dataset.idx,10);
+      formPersone[idx].pagato = inp.checked;
+    });
+  });
+  document.querySelectorAll("[data-rm]").forEach(function(btn){
+    on(btn, "click", function(){
+      var idx = parseInt(btn.dataset.rm,10);
+      formPersone.splice(idx,1);
+      if(formPersone.length===0) formPersone = [{nome:"",costo:""}];
+      renderNuova();
+    });
+  });
+
+  on(document.getElementById("btn-add-row"), "click", function(){
+    formPersone.push({nome:"",costo:"",pagato:false});
+    renderNuova();
+    var rows = document.querySelectorAll(".f-persona-nome");
+    if(rows.length) rows[rows.length-1].focus();
+  });
+
+  var cancelBtn = document.getElementById("btn-annulla-edit");
+  if(cancelBtn){
+    on(cancelBtn, "click", function(){
+      resetForm();
+      renderNuova();
+    });
+  }
+
+  on(document.getElementById("btn-salva-giorno"), "click", function(){
+    var cliente = (formCliente||"").trim();
+    if(!cliente){ showToast("Inserisci il nome del cliente"); return; }
+    var importo = parseFloat(formImporto);
+    if(isNaN(importo)){ showToast("Inserisci l'importo del cliente"); return; }
+
+    var persone = formPersone
+      .map(function(p){ return {nome:(p.nome||"").trim(), costo: parseFloat(p.costo)||0, pagato: !!p.pagato}; })
+      .filter(function(p){ return p.nome.length>0; });
+
+    if(persone.length===0){ showToast("Aggiungi almeno una persona"); return; }
+
+    if(editingId){
+      var idx = giornate.findIndex(function(g){ return g.id===editingId; });
+      if(idx>=0){
+        giornate[idx] = {
+          id: editingId,
+          data: formData,
+          cliente: cliente,
+          importoCliente: importo,
+          pagamentoCliente: formPagamento || "",
+          note: formNote || "",
+          persone: persone
+        };
+      }
+      showToast("Giornata aggiornata \u2713");
+    } else {
+      giornate.push({
+        id: uid(),
+        data: formData,
+        cliente: cliente,
+        importoCliente: importo,
+        pagamentoCliente: formPagamento || "",
+        note: formNote || "",
+        persone: persone
+      });
+      showToast("Giornata registrata \u2713");
+    }
+    saveData();
+    resetForm();
+    renderNuova();
+    renderTotalsStrip();
+  });
+}
+
+/* ---------------- GIORNATE ---------------- */
+function renderGiornate(){
+  var lista = giornate.slice().sort(function(a,b){ return b.data.localeCompare(a.data); });
+  if(lista.length===0){
+    $content.innerHTML = '<h2 class="section-title">Giornate</h2><div class="msg-empty">Nessuna giornata registrata.<br>Vai su "Nuova" per iniziare il registro.</div>';
+    return;
+  }
+  var html = '<h2 class="section-title">Giornate <span class="count">' + lista.length + ' totali</span></h2>';
+
+  lista.forEach(function(g){
+    var costi = giornoCosti(g);
+    var margine = giornoMargine(g);
+    var nonPagato = giornoNonPagato(g);
+    var isOpen = openGiornoId === g.id;
+    var nPersone = (g.persone||[]).length;
+    var pagLbl = pagamentoLabel(g.pagamentoCliente);
+    var detailRows = (g.persone||[]).map(function(p, pi){
+      return '<div class="dline"><span>' + escapeHtml(p.nome) + '</span>' +
+        '<span style="display:flex;align-items:center;gap:8px;">&euro; ' + eur(p.costo) +
+        '<button class="pay-toggle ' + (p.pagato ? "paid" : "unpaid") + '" data-pay-giorno="' + g.id + '" data-pay-idx="' + pi + '">' + (p.pagato ? "Pagato" : "Da pagare") + '</button>' +
+        '</span></div>';
+    }).join("");
+
+    html +=
+      '<div class="giorno-card">' +
+        '<div class="giorno-head" data-id="' + g.id + '">' +
+          '<div class="giorno-day">' + fmtDateShort(g.data) + '</div>' +
+          '<div class="giorno-info">' +
+            '<div class="cli">' + escapeHtml(g.cliente) + '</div>' +
+            '<div class="meta">' + nPersone + (nPersone===1 ? ' persona' : ' persone') + ' &middot; ' + fmtDate(g.data) + '</div>' +
+            (pagLbl ? '<div class="badge-pag ' + g.pagamentoCliente + '">' + pagLbl + '</div>' : '') +
+          '</div>' +
+          '<div class="giorno-amt">' +
+            '<div class="imp">&euro; ' + eur(g.importoCliente) + '</div>' +
+            '<div class="margine">margine &euro; ' + eur(margine) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="giorno-detail ' + (isOpen ? "open" : "") + '">' +
+          (g.note ? '<div style="font-family:var(--font-display);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin:10px 0;">' + escapeHtml(g.note) + '</div>' : "") +
+          detailRows +
+          '<div class="dline" style="font-weight:700;color:var(--ink);"><span>Totale squadra</span><span>&euro; ' + eur(costi) + '</span></div>' +
+          (nonPagato>0 ? '<div class="dline" style="font-weight:700;color:var(--debit);"><span>Ancora da pagare</span><span>&euro; ' + eur(nonPagato) + '</span></div>' : '') +
+          '<div class="giorno-actions">' +
+            '<button class="btn-edit" data-edit="' + g.id + '">Modifica</button>' +
+            '<button class="btn-del" data-del="' + g.id + '">Elimina</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  });
+
+  $content.innerHTML = html;
+
+  document.querySelectorAll(".giorno-head").forEach(function(h){
+    on(h, "click", function(){
+      var id = h.dataset.id;
+      openGiornoId = (openGiornoId===id) ? null : id;
+      renderGiornate();
+    });
+  });
+  document.querySelectorAll("[data-pay-giorno]").forEach(function(btn){
+    on(btn, "click", function(e){
+      e.stopPropagation();
+      var gid = btn.dataset.payGiorno;
+      var pidx = parseInt(btn.dataset.payIdx,10);
+      var g = giornate.find(function(x){ return x.id===gid; });
+      if(g && g.persone && g.persone[pidx]){
+        g.persone[pidx].pagato = !g.persone[pidx].pagato;
+        saveData();
+        renderGiornate();
+        renderTotalsStrip();
+      }
+    });
+  });
+  document.querySelectorAll("[data-edit]").forEach(function(b){
+    on(b, "click", function(e){
+      e.stopPropagation();
+      var id = b.dataset.edit;
+      var g = giornate.find(function(x){ return x.id===id; });
+      if(g){
+        loadGiornoIntoForm(g);
+        renderTab("nuova");
+      }
+    });
+  });
+  document.querySelectorAll("[data-del]").forEach(function(b){
+    on(b, "click", function(e){
+      e.stopPropagation();
+      var id = b.dataset.del;
+      if(confirm("Eliminare questa giornata dal registro?")){
+        giornate = giornate.filter(function(g){ return g.id!==id; });
+        saveData();
+        showToast("Giornata eliminata");
+        renderGiornate();
+        renderTotalsStrip();
+      }
+    });
+  });
+}
+
+/* ---------------- RIEPILOGO ---------------- */
+function renderRiepilogo(){
+  var backupSection =
+    '<h2 class="section-title">Backup dati</h2>' +
+    '<div class="card">' +
+      '<div style="font-family:var(--font-body);font-size:13px;color:var(--ink-soft);margin-bottom:10px;">Scarica una copia di tutti i dati, o ripristinali da un backup precedente.</div>' +
+      '<button class="btn-secondary" id="btn-export" style="margin-top:0;">&#8681; Esporta backup (.json)</button>' +
+      '<button class="btn-secondary" id="btn-import">&#8679; Importa backup</button>' +
+      '<input type="file" id="f-import-file" accept="application/json,.json" style="display:none;">' +
+    '</div>';
+
+  function wireBackupButtons(){
+    on(document.getElementById("btn-export"), "click", function(){
+      var payload = JSON.stringify({ giornate: giornate, esportato: new Date().toISOString() }, null, 2);
+      var fname = "registro-giornate-backup-" + todayISO() + ".json";
+      var ok = function(){
+        try{ window.localStorage.setItem(BACKUP_KEY, todayISO()); }catch(e){}
+        showToast("Backup salvato \u2713");
+      };
+      var scarica = function(){
+        var blob = new Blob([payload], {type:"application/json"});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; a.download = fname;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+        ok();
+      };
+      try{
+        var file = new File([payload], fname, {type:"application/json"});
+        if(navigator.canShare && navigator.canShare({files:[file]})){
+          navigator.share({files:[file], title:"Backup registro giornate"}).then(ok).catch(function(e){
+            if(e && e.name!=="AbortError") scarica();
+          });
+          return;
+        }
+      }catch(e){}
+      scarica();
+    });
+
+    on(document.getElementById("btn-import"), "click", function(){
+      document.getElementById("f-import-file").click();
+    });
+
+    on(document.getElementById("f-import-file"), "change", function(e){
+      var file = e.target.files && e.target.files[0];
+      if(!file) return;
+      var reader = new FileReader();
+      reader.onload = function(){
+        try{
+          var parsed = JSON.parse(reader.result);
+          var imported = Array.isArray(parsed) ? parsed : parsed.giornate;
+          if(!Array.isArray(imported)) throw new Error("Formato file non valido");
+          var sostituisci = confirm("Importare " + imported.length + " giornate?\n\nOK = sostituisce tutti i dati attuali\nAnnulla = aggiunge questi dati a quelli esistenti");
+          if(sostituisci){
+            giornate = imported;
+          } else {
+            var existingIds = {};
+            giornate.forEach(function(g){ existingIds[g.id] = true; });
+            imported.forEach(function(g){
+              if(!g.id || existingIds[g.id]) g.id = uid();
+              giornate.push(g);
+            });
+          }
+          saveData();
+          showToast("Backup importato \u2713");
+          renderRiepilogo();
+          renderTotalsStrip();
+        }catch(err){
+          reportError(err);
+        }
+        e.target.value = "";
+      };
+      reader.readAsText(file);
+    });
+  }
+
+  if(giornate.length===0){
+    $content.innerHTML =
+      '<h2 class="section-title">Riepilogo</h2>' +
+      '<div class="msg-empty">Registra qualche giornata per vedere il riepilogo.</div>' +
+      backupSection;
+    wireBackupButtons();
+    return;
+  }
+
+  var mesiSet = {};
+  giornate.forEach(function(g){ mesiSet[monthKey(g.data)] = true; });
+  var mesi = Object.keys(mesiSet).sort().reverse();
+
+  var filtered = RIEPILOGO_MESE==="tutti" ? giornate : giornate.filter(function(g){ return monthKey(g.data)===RIEPILOGO_MESE; });
+
+  var meseOpts = '<option value="tutti"' + (RIEPILOGO_MESE==="tutti"?' selected':'') + '>Tutti i periodi</option>';
+  mesi.forEach(function(m){
+    meseOpts += '<option value="' + m + '"' + (RIEPILOGO_MESE===m?' selected':'') + '>' + monthLabel(m) + '</option>';
+  });
+
+  // Totali del periodo filtrato
+  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0;
+  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); });
+  var periodoMargine = periodoCredit - periodoDebit;
+
+  var periodoStrip =
+    '<div class="totals-strip" style="margin:0 0 20px;">' +
+      '<div class="tot-card credit"><div class="lbl">Da clienti</div><div class="val">&euro; ' + eur(periodoCredit) + '</div></div>' +
+      '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(periodoDebit) + '</div></div>' +
+      '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(periodoNonPagato) + '</div></div>' +
+      '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(periodoMargine) + '</div></div>' +
+    '</div>';
+
+  /* ---- SEZIONE CLIENTI ---- */
+  var perCliente = {};
+  filtered.forEach(function(g){
+    if(!perCliente[g.cliente]) perCliente[g.cliente] = {tot:0, giornate:[]};
+    perCliente[g.cliente].tot += (g.importoCliente||0);
+    perCliente[g.cliente].giornate.push(g);
+  });
+  var nomiClienti = Object.keys(perCliente).sort();
+  var clientiHtml = "";
+  if(nomiClienti.length===0){
+    clientiHtml = '<div class="msg-empty" style="padding:16px 0;">Nessun dato per questo periodo.</div>';
+  } else {
+    nomiClienti.forEach(function(nome){
+      var info = perCliente[nome];
+      var nPersoneGiorno = 0;
+      info.giornate.forEach(function(g){ nPersoneGiorno += (g.persone||[]).length; });
+      var righeGiorni = info.giornate.slice().sort(function(a,b){ return a.data.localeCompare(b.data); }).map(function(g){
+        var nomiPersoneGiorno = (g.persone||[]).map(function(p){ return escapeHtml(p.nome); }).join(", ");
+        var pagLblCli = pagamentoLabel(g.pagamentoCliente);
+        return '<div class="eline"><span class="d1">' + fmtDateShort(g.data) + ' &middot; ' + (g.persone||[]).length + ' pers. (' + nomiPersoneGiorno + ')' + (pagLblCli ? ' &middot; ' + pagLblCli : '') + '</span><span>&euro; ' + eur(g.importoCliente) + '</span></div>';
+      }).join("");
+      clientiHtml +=
+        '<div class="ledger-entity">' +
+          '<div class="ledger-entity-head" style="cursor:default;">' +
+            '<div><div class="en-name">' + escapeHtml(nome) + '</div>' +
+            '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata':' giornate') + ' &middot; ' + nPersoneGiorno + ' persone-giorno</div></div>' +
+            '<div class="en-amt c">&euro; ' + eur(info.tot) + '</div>' +
+          '</div>' +
+          '<div class="ledger-entity-body open">' + righeGiorni + '</div>' +
+        '</div>';
+    });
+  }
+
+  /* ---- SEZIONE PERSONE ---- */
+  var perPersona = {};
+  filtered.forEach(function(g){
+    (g.persone||[]).forEach(function(p){
+      if(!perPersona[p.nome]) perPersona[p.nome] = {tot:0, nonPagato:0, giornate:[]};
+      perPersona[p.nome].tot += (p.costo||0);
+      if(!p.pagato) perPersona[p.nome].nonPagato += (p.costo||0);
+      perPersona[p.nome].giornate.push({data:g.data, cliente:g.cliente, costo:p.costo});
+    });
+  });
+  var nomiPersone = Object.keys(perPersona).sort();
+  var personeHtml = "";
+  if(nomiPersone.length===0){
+    personeHtml = '<div class="msg-empty" style="padding:16px 0;">Nessun dato per questo periodo.</div>';
+  } else {
+    nomiPersone.forEach(function(nome){
+      var info = perPersona[nome];
+      var perClientePersona = {};
+      info.giornate.forEach(function(x){
+        if(!perClientePersona[x.cliente]) perClientePersona[x.cliente] = {giorni:0, tot:0, date:[]};
+        perClientePersona[x.cliente].giorni += 1;
+        perClientePersona[x.cliente].tot += (x.costo||0);
+        perClientePersona[x.cliente].date.push(x.data);
+      });
+      var nomiClientiPersona = Object.keys(perClientePersona).sort();
+      var righeClienti = nomiClientiPersona.map(function(cli){
+        var c = perClientePersona[cli];
+        var dateStr = c.date.slice().sort().map(fmtDateShort).join(", ");
+        return '<div class="eline"><span class="d1">' + escapeHtml(cli) + ' &middot; ' + c.giorni + (c.giorni===1?' giornata':' giornate') + ' (' + dateStr + ')</span><span>&euro; ' + eur(c.tot) + '</span></div>';
+      }).join("");
+      var subPagato = info.nonPagato>0
+        ? ' &middot; <span style="color:var(--debit);">da pagare &euro; ' + eur(info.nonPagato) + '</span>'
+        : ' &middot; <span style="color:var(--credit);">tutto pagato</span>';
+      personeHtml +=
+        '<div class="ledger-entity">' +
+          '<div class="ledger-entity-head" style="cursor:default;">' +
+            '<div><div class="en-name">' + escapeHtml(nome) + '</div>' +
+            '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata lavorata':' giornate lavorate') + ' &middot; ' + nomiClientiPersona.length + (nomiClientiPersona.length===1?' cliente':' clienti') + subPagato + '</div></div>' +
+            '<div class="en-amt d">&euro; ' + eur(info.tot) + '</div>' +
+          '</div>' +
+          '<div class="ledger-entity-body open">' + righeClienti + '</div>' +
+        '</div>';
+    });
+  }
+
+  /* ---- SEZIONE MARGINE ---- */
+  var margineHtml = "";
+  if(filtered.length===0){
+    margineHtml = '<div class="msg-empty" style="padding:16px 0;">Nessun dato per questo periodo.</div>';
+  } else {
+    var righeMargine = filtered.slice().sort(function(a,b){ return a.data.localeCompare(b.data); }).map(function(g){
+      var m = giornoMargine(g);
+      return '<div class="eline"><span class="d1">' + fmtDateShort(g.data) + ' &middot; ' + escapeHtml(g.cliente) + '</span><span style="color:' + (m>=0?'var(--brass)':'var(--debit)') + ';font-weight:600;">&euro; ' + eur(m) + '</span></div>';
+    }).join("");
+    margineHtml =
+      '<div class="ledger-entity">' +
+        '<div class="ledger-entity-head" style="cursor:default;">' +
+          '<div><div class="en-name">Margine per giornata</div><div class="en-sub">' + filtered.length + ' giornate nel periodo</div></div>' +
+          '<div class="en-amt m">&euro; ' + eur(periodoMargine) + '</div>' +
+        '</div>' +
+        '<div class="ledger-entity-body open">' + righeMargine + '</div>' +
+      '</div>';
+  }
+
+  $content.innerHTML =
+    '<h2 class="section-title">Riepilogo</h2>' +
+    '<div class="filter-row"><select id="f-mese">' + meseOpts + '</select></div>' +
+    periodoStrip +
+    '<h2 class="section-title">Da incassare &mdash; per cliente <span class="count">' + nomiClienti.length + '</span></h2>' +
+    clientiHtml +
+    '<h2 class="section-title">Da pagare &mdash; per persona <span class="count">' + nomiPersone.length + '</span></h2>' +
+    personeHtml +
+    '<h2 class="section-title">Margine &mdash; per giornata</h2>' +
+    margineHtml +
+    backupSection;
+
+  on(document.getElementById("f-mese"), "change", function(e){ RIEPILOGO_MESE = e.target.value; renderRiepilogo(); });
+  wireBackupButtons();
+}
+
+/* ---------------- TAB SWITCH ---------------- */
+function renderTab(tab){
+  CURRENT_TAB = tab;
+  document.querySelectorAll("nav.tabbar button").forEach(function(b){
+    b.classList.toggle("active", b.dataset.tab===tab);
+  });
+  renderTotalsStrip();
+  if(tab==="nuova") renderNuova();
+  else if(tab==="giornate") renderGiornate();
+  else if(tab==="riepilogo") renderRiepilogo();
+}
+
+document.querySelectorAll("nav.tabbar button").forEach(function(b){
+  on(b, "click", function(){ renderTab(b.dataset.tab); });
+});
+
+var errBanner = document.getElementById("error-banner");
+if(errBanner){
+  errBanner.addEventListener("click", function(){ errBanner.style.display = "none"; });
+}
+window.addEventListener("error", function(e){
+  reportError((e && e.error) ? e.error : (e && e.message ? e.message : "errore sconosciuto"));
+});
+window.addEventListener("unhandledrejection", function(e){
+  reportError(e && e.reason ? e.reason : "operazione non riuscita");
+});
+
+try{
+  resetForm();
+  loadData();
+  renderTab("nuova");
+  cloudInit();
+  try{
+    var lb = window.localStorage.getItem(BACKUP_KEY);
+    var giorniDa = lb ? Math.floor((Date.now()-new Date(lb+"T12:00:00").getTime())/86400000) : 999;
+    if(giornate.length>0 && giorniDa>=14){
+      setTimeout(function(){ showToast("Fai un backup: Riepilogo > Esporta backup"); }, 1500);
+    }
+  }catch(e){}
+  if(!storageOk){
+    showToast("Salvataggio non disponibile: i dati resteranno solo per questa sessione");
+  }
+}catch(err){
+  reportError(err);
+}
+</script>
+</body>
+</html>
