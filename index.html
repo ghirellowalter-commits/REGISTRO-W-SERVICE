@@ -96,6 +96,8 @@
   .tot-card.credit .val{ color:var(--credit); }
   .tot-card.debit .val{ color:var(--debit); }
   .tot-card.margin .val{ color:var(--brass); }
+  .tot-card.spese .val{ color:var(--ink); }
+  .spese-sub{ font-family:var(--font-mono); font-size:10px; color:var(--ink-soft); margin-top:3px; }
 
   h2.section-title{
     font-family:var(--font-display); font-weight:700; font-size:19px;
@@ -378,6 +380,8 @@ var formData = "";
 var formCliente = "";
 var formImporto = "";
 var formNote = "";
+var formCarb = "";
+var formPasti = "";
 var formPagamento = "";
 
 var openGiornoId = null;
@@ -450,6 +454,7 @@ function giornoCosti(g){
   return tot;
 }
 function giornoMargine(g){ return (g.importoCliente||0) - giornoCosti(g); }
+function giornoSpese(g){ return g.spese || 0; }
 function giornoNonPagato(g){
   var tot = 0;
   (g.persone||[]).forEach(function(p){ if(!p.pagato) tot += (p.costo||0); });
@@ -475,11 +480,14 @@ function listaPersoneStoriche(){
 }
 
 function renderTotalsStrip(){
-  var totCredit = 0, totDebit = 0, totNonPagato = 0;
+  var totCredit = 0, totDebit = 0, totNonPagato = 0, totSpese = 0, totCarb = 0, totPasti = 0;
   giornate.forEach(function(g){
     totCredit += (g.importoCliente||0);
     totDebit += giornoCosti(g);
     totNonPagato += giornoNonPagato(g);
+    totSpese += giornoSpese(g);
+    totCarb += (g.carburante||0);
+    totPasti += (g.pasti||0);
   });
   var margine = totCredit - totDebit;
   $totalsWrap.innerHTML =
@@ -488,6 +496,7 @@ function renderTotalsStrip(){
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(totDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(totNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(margine) + '</div></div>' +
+      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(totSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(totCarb) + ' &middot; pasti &euro; ' + eur(totPasti) + '</div></div>' +
     '</div>';
 }
 
@@ -512,6 +521,8 @@ function resetForm(){
   formCliente = "";
   formImporto = "";
   formNote = "";
+  formCarb = "";
+  formPasti = "";
   formPagamento = "";
   formDaProgramma = null;
   formPersone = [{nome:"", costo:"", pagato:false}];
@@ -523,6 +534,8 @@ function loadGiornoIntoForm(g){
   formCliente = g.cliente;
   formImporto = String(g.importoCliente);
   formNote = g.note || "";
+  formCarb = g.carburante ? String(g.carburante) : "";
+  formPasti = g.pasti ? String(g.pasti) : "";
   formPagamento = g.pagamentoCliente || "";
   formPersone = (g.persone||[]).map(function(p){ return {nome:p.nome, costo:String(p.costo), pagato:!!p.pagato}; });
   if(formPersone.length===0) formPersone = [{nome:"",costo:"",pagato:false}];
@@ -589,6 +602,11 @@ function renderNuova(){
       '<div id="persone-rows">' + personeRows + '</div>' +
       '<button class="btn-secondary" id="btn-add-row">+ Aggiungi persona</button>' +
 
+      '<label>Carburante (&euro;) &middot; spesa fuori margine</label>' +
+      '<input type="number" inputmode="decimal" step="0.01" id="f-carb" placeholder="0.00" value="' + escapeHtml(formCarb) + '">' +
+      '<label>Pasti (&euro;) &middot; spesa fuori margine</label>' +
+      '<input type="number" inputmode="decimal" step="0.01" id="f-pasti" placeholder="0.00" value="' + escapeHtml(formPasti) + '">' +
+
       '<label>Note (opzionale)</label>' +
       '<textarea id="f-note" placeholder="es. montaggio cucina, 2&deg; piano senza ascensore&hellip;">' + escapeHtml(formNote) + '</textarea>' +
 
@@ -601,6 +619,8 @@ function renderNuova(){
   on(document.getElementById("f-importo"), "input", function(e){ formImporto = e.target.value; });
   on(document.getElementById("f-pagamento"), "change", function(e){ formPagamento = e.target.value; });
   on(document.getElementById("f-note"), "input", function(e){ formNote = e.target.value; });
+  on(document.getElementById("f-carb"), "input", function(e){ formCarb = e.target.value; });
+  on(document.getElementById("f-pasti"), "input", function(e){ formPasti = e.target.value; });
 
   document.querySelectorAll(".f-persona-nome").forEach(function(inp){
     on(inp, "input", function(){
@@ -667,6 +687,9 @@ function renderNuova(){
           cliente: cliente,
           importoCliente: importo,
           pagamentoCliente: formPagamento || "",
+          carburante: parseFloat(formCarb) || 0,
+          pasti: parseFloat(formPasti) || 0,
+          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
           note: formNote || "",
           persone: persone
         };
@@ -679,6 +702,9 @@ function renderNuova(){
         cliente: cliente,
         importoCliente: importo,
         pagamentoCliente: formPagamento || "",
+          carburante: parseFloat(formCarb) || 0,
+          pasti: parseFloat(formPasti) || 0,
+          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
         note: formNote || "",
         persone: persone
       });
@@ -738,6 +764,7 @@ function renderGiornate(){
           detailRows +
           '<div class="dline" style="font-weight:700;color:var(--ink);"><span>Totale squadra</span><span>&euro; ' + eur(costi) + '</span></div>' +
           (nonPagato>0 ? '<div class="dline" style="font-weight:700;color:var(--debit);"><span>Ancora da pagare</span><span>&euro; ' + eur(nonPagato) + '</span></div>' : '') +
+          (g.spese>0 ? '<div class="dline" style="color:var(--ink-soft);"><span>Spese fuori margine' + ((g.carburante||g.pasti) ? ' &middot; carburante &euro; ' + eur(g.carburante||0) + ' &middot; pasti &euro; ' + eur(g.pasti||0) : '') + '</span><span>&euro; ' + eur(g.spese) + '</span></div>' : '') +
           '<div class="giorno-actions">' +
             '<button class="btn-edit" data-edit="' + g.id + '">Modifica</button>' +
             '<button class="btn-del" data-del="' + g.id + '">Elimina</button>' +
@@ -901,8 +928,8 @@ function renderRiepilogo(){
   });
 
   // Totali del periodo filtrato
-  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0;
-  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); });
+  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0, periodoSpese = 0, periodoCarb = 0, periodoPasti = 0;
+  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); periodoSpese += giornoSpese(g); periodoCarb += (g.carburante||0); periodoPasti += (g.pasti||0); });
   var periodoMargine = periodoCredit - periodoDebit;
 
   var periodoStrip =
@@ -911,6 +938,7 @@ function renderRiepilogo(){
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(periodoDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(periodoNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(periodoMargine) + '</div></div>' +
+      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(periodoSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(periodoCarb) + ' &middot; pasti &euro; ' + eur(periodoPasti) + '</div></div>' +
     '</div>';
 
   /* ---- SEZIONE CLIENTI ---- */
@@ -1123,7 +1151,7 @@ function renderCalendario(){
     on(b, "click", function(){
       var j = trova(b.dataset.reg); if(!j) return;
       editingId = null;
-      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formPagamento = "";
+      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formCarb = ""; formPasti = ""; formPagamento = "";
       formPersone = (j.persone||[]).map(function(n){ return {nome:n, costo:"", pagato:false}; });
       if(formPersone.length===0){ formPersone = [{nome:"", costo:"", pagato:false}]; }
       formDaProgramma = j.id;
