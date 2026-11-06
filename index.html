@@ -1406,9 +1406,12 @@ function renderAzienda(){
   document.querySelectorAll("[data-az]").forEach(function(b){
     on(b, "click", function(){ copiaTesto(azienda[parseInt(b.dataset.az,10)].v); });
   });
-  on(document.getElementById("az-all"), "click", function(){
-    copiaTesto(piene.map(function(x){ return x.r.l + ": " + x.r.v; }).join("\n"));
-  });
+  var btnAll = document.getElementById("az-all");
+  if(btnAll){
+    on(btnAll, "click", function(){
+      copiaTesto(piene.map(function(x){ return x.r.l + ": " + x.r.v; }).join("\n"));
+    });
+  }
   on(document.getElementById("az-mod"), "click", function(){ azEdit = true; renderAzienda(); });
 }
 
