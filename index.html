@@ -319,6 +319,9 @@
   .sq-add{ display:flex; gap:8px; }
   .sq-add input{ flex:1; }
   .sq-addbtn{ border:none; background:var(--ink); color:#fff; border-radius:14px; padding:0 18px; font-weight:600; font-size:14px; cursor:pointer; }
+  .btn-saldo{ width:100%; margin-top:10px; border:none; border-radius:14px; padding:12px; background:var(--credit-bg); color:var(--credit); font-weight:600; font-size:14px; cursor:pointer; }
+  .btn-saldo:active{ opacity:.8; }
+  .badge-pag.inc{ background:var(--credit); color:#fff; }
 </style>
 </head>
 <body>
@@ -439,6 +442,7 @@ var formImporto = "";
 var formNote = "";
 var formCarb = "";
 var formPasti = "";
+var formIncassato = false;
 var formPagamento = "";
 
 var openGiornoId = null;
@@ -511,6 +515,7 @@ function giornoCosti(g){
   return tot;
 }
 function giornoMargine(g){ return (g.importoCliente||0) - giornoCosti(g); }
+function giornoDaIncassare(g){ return g.incassato ? 0 : (g.importoCliente||0); }
 function giornoSpese(g){ return g.spese || 0; }
 function giornoNonPagato(g){
   var tot = 0;
@@ -537,18 +542,20 @@ function listaPersoneStoriche(){
 }
 
 function totaliComplessiviHtml(){
-  var totCredit = 0, totDebit = 0, totNonPagato = 0, totSpese = 0, totCarb = 0, totPasti = 0;
+  var totCredit = 0, totDebit = 0, totNonPagato = 0, totSpese = 0, totCarb = 0, totPasti = 0, totInc = 0;
   giornate.forEach(function(g){
     totCredit += (g.importoCliente||0);
     totDebit += giornoCosti(g);
     totNonPagato += giornoNonPagato(g);
     totSpese += giornoSpese(g);
+    totInc += giornoDaIncassare(g);
     totCarb += (g.carburante||0);
     totPasti += (g.pasti||0);
   });
   var margine = totCredit - totDebit;
   return '<div class="totals-strip">' +
       '<div class="tot-card credit"><div class="lbl">Da clienti</div><div class="val">&euro; ' + eur(totCredit) + '</div></div>' +
+      '<div class="tot-card credit"><div class="lbl">Da incassare</div><div class="val">&euro; ' + eur(totInc) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(totDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(totNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(margine) + '</div></div>' +
@@ -580,6 +587,7 @@ function resetForm(){
   formNote = "";
   formCarb = "";
   formPasti = "";
+  formIncassato = false;
   formPagamento = "";
   formDaProgramma = null;
   formPersone = [{nome:"", costo:"", pagato:false}];
@@ -593,6 +601,7 @@ function loadGiornoIntoForm(g){
   formNote = g.note || "";
   formCarb = g.carburante ? String(g.carburante) : "";
   formPasti = g.pasti ? String(g.pasti) : "";
+  formIncassato = !!g.incassato;
   formPagamento = g.pagamentoCliente || "";
   formPersone = (g.persone||[]).map(function(p){ return {nome:p.nome, costo:String(p.costo), pagato:!!p.pagato}; });
   if(formPersone.length===0) formPersone = [{nome:"",costo:"",pagato:false}];
@@ -654,6 +663,7 @@ function renderNuova(){
         '<option value="cash"' + (formPagamento==="cash"?' selected':'') + '>Cash</option>' +
         '<option value="fattura"' + (formPagamento==="fattura"?' selected':'') + '>Fattura</option>' +
       '</select>' +
+      '<label class="chk-row" style="margin-top:12px;"><input type="checkbox" id="f-incassato"' + (formIncassato ? ' checked' : '') + '> Il cliente ha gi\u00e0 pagato</label>' +
 
       '<label>Persone mandate a lavorare</label>' +
       '<div id="persone-rows">' + personeRows + '</div>' +
@@ -677,6 +687,7 @@ function renderNuova(){
   on(document.getElementById("f-importo"), "input", function(e){ formImporto = e.target.value; });
   on(document.getElementById("f-pagamento"), "change", function(e){ formPagamento = e.target.value; });
   on(document.getElementById("f-note"), "input", function(e){ formNote = e.target.value; });
+  on(document.getElementById("f-incassato"), "change", function(e){ formIncassato = e.target.checked; });
   on(document.getElementById("f-carb"), "input", function(e){ formCarb = e.target.value; });
   on(document.getElementById("f-pasti"), "input", function(e){ formPasti = e.target.value; });
 
@@ -745,6 +756,7 @@ function renderNuova(){
           cliente: cliente,
           importoCliente: importo,
           pagamentoCliente: formPagamento || "",
+          incassato: !!formIncassato,
           carburante: parseFloat(formCarb) || 0,
           pasti: parseFloat(formPasti) || 0,
           spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
@@ -760,6 +772,7 @@ function renderNuova(){
         cliente: cliente,
         importoCliente: importo,
         pagamentoCliente: formPagamento || "",
+          incassato: !!formIncassato,
           carburante: parseFloat(formCarb) || 0,
           pasti: parseFloat(formPasti) || 0,
           spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
@@ -813,6 +826,7 @@ function renderGiornate(){
             '<div class="cli">' + escapeHtml(g.cliente) + '</div>' +
             '<div class="meta">' + nPersone + (nPersone===1 ? ' persona' : ' persone') + ' &middot; ' + fmtDate(g.data) + '</div>' +
             (pagLbl ? '<div class="badge-pag ' + g.pagamentoCliente + '">' + pagLbl + '</div>' : '') +
+            (g.incassato ? '<div class="badge-pag inc" style="margin-left:4px;">Incassato</div>' : '') +
           '</div>' +
           '<div class="giorno-amt">' +
             '<div class="imp">&euro; ' + eur(g.importoCliente) + '</div>' +
@@ -822,6 +836,9 @@ function renderGiornate(){
         '<div class="giorno-detail ' + (isOpen ? "open" : "") + '">' +
           (g.note ? '<div style="font-family:var(--font-display);font-style:italic;font-size:13.5px;color:var(--ink-soft);margin:10px 0;">' + escapeHtml(g.note) + '</div>' : "") +
           detailRows +
+          '<div class="dline"><span>Pagamento cliente' + (pagLbl ? ' &middot; ' + pagLbl : '') + '</span>' +
+            '<span style="display:flex;align-items:center;gap:8px;">&euro; ' + eur(g.importoCliente) +
+            '<button class="pay-toggle ' + (g.incassato ? "paid" : "unpaid") + '" data-inc-giorno="' + g.id + '">' + (g.incassato ? "Incassato" : "Da incassare") + '</button></span></div>' +
           '<div class="dline" style="font-weight:700;color:var(--ink);"><span>Totale squadra</span><span>&euro; ' + eur(costi) + '</span></div>' +
           (nonPagato>0 ? '<div class="dline" style="font-weight:700;color:var(--debit);"><span>Ancora da pagare</span><span>&euro; ' + eur(nonPagato) + '</span></div>' : '') +
           (g.spese>0 ? '<div class="dline" style="color:var(--ink-soft);"><span>Spese fuori margine' + ((g.carburante||g.pasti) ? ' &middot; carburante &euro; ' + eur(g.carburante||0) + ' &middot; pasti &euro; ' + eur(g.pasti||0) : '') + '</span><span>&euro; ' + eur(g.spese) + '</span></div>' : '') +
@@ -854,6 +871,16 @@ function renderGiornate(){
         renderGiornate();
         renderTotalsStrip();
       }
+    });
+  });
+  document.querySelectorAll("[data-inc-giorno]").forEach(function(btn){
+    on(btn, "click", function(e){
+      e.stopPropagation();
+      var g = giornate.find(function(x){ return x.id===btn.dataset.incGiorno; });
+      if(!g) return;
+      g.incassato = !g.incassato;
+      saveData();
+      renderGiornate();
     });
   });
   document.querySelectorAll("[data-rmp-giorno]").forEach(function(btn){
@@ -1003,13 +1030,14 @@ function renderRiepilogo(){
   });
 
   // Totali del periodo filtrato
-  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0, periodoSpese = 0, periodoCarb = 0, periodoPasti = 0;
-  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); periodoSpese += giornoSpese(g); periodoCarb += (g.carburante||0); periodoPasti += (g.pasti||0); });
+  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0, periodoSpese = 0, periodoCarb = 0, periodoPasti = 0, periodoInc = 0;
+  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); periodoSpese += giornoSpese(g); periodoInc += giornoDaIncassare(g); periodoCarb += (g.carburante||0); periodoPasti += (g.pasti||0); });
   var periodoMargine = periodoCredit - periodoDebit;
 
   var periodoStrip =
     '<div class="totals-strip" style="margin:0 0 20px;">' +
       '<div class="tot-card credit"><div class="lbl">Da clienti</div><div class="val">&euro; ' + eur(periodoCredit) + '</div></div>' +
+      '<div class="tot-card credit"><div class="lbl">Da incassare</div><div class="val">&euro; ' + eur(periodoInc) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(periodoDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(periodoNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(periodoMargine) + '</div></div>' +
@@ -1019,8 +1047,9 @@ function renderRiepilogo(){
   /* ---- SEZIONE CLIENTI ---- */
   var perCliente = {};
   filtered.forEach(function(g){
-    if(!perCliente[g.cliente]) perCliente[g.cliente] = {tot:0, giornate:[]};
+    if(!perCliente[g.cliente]) perCliente[g.cliente] = {tot:0, daInc:0, giornate:[]};
     perCliente[g.cliente].tot += (g.importoCliente||0);
+    perCliente[g.cliente].daInc += giornoDaIncassare(g);
     perCliente[g.cliente].giornate.push(g);
   });
   var nomiClienti = Object.keys(perCliente).sort();
@@ -1035,16 +1064,22 @@ function renderRiepilogo(){
       var righeGiorni = info.giornate.slice().sort(function(a,b){ return a.data.localeCompare(b.data); }).map(function(g){
         var nomiPersoneGiorno = (g.persone||[]).map(function(p){ return escapeHtml(p.nome); }).join(", ");
         var pagLblCli = pagamentoLabel(g.pagamentoCliente);
-        return '<div class="eline"><span class="d1">' + fmtDateShort(g.data) + ' &middot; ' + (g.persone||[]).length + ' pers. (' + nomiPersoneGiorno + ')' + (pagLblCli ? ' &middot; ' + pagLblCli : '') + '</span><span>&euro; ' + eur(g.importoCliente) + '</span></div>';
+        return '<div class="eline"><span class="d1">' + fmtDateShort(g.data) + ' &middot; ' + (g.persone||[]).length + ' pers. (' + nomiPersoneGiorno + ')' + (pagLblCli ? ' &middot; ' + pagLblCli : '') + (g.incassato ? ' &middot; incassato' : '') + '</span><span>&euro; ' + eur(g.importoCliente) + '</span></div>';
       }).join("");
+      var subInc = info.daInc>0
+        ? ' &middot; <span style="color:var(--debit);">da incassare &euro; ' + eur(info.daInc) + '</span>'
+        : ' &middot; <span style="color:var(--credit);">tutto incassato</span>';
+      var btnInc = (info.daInc>0 && RIEPILOGO_MESE!=="tutti")
+        ? '<button class="btn-saldo" data-incasso="' + escapeHtml(nome) + '">Segna tutto incassato &middot; &euro; ' + eur(info.daInc) + '</button>'
+        : '';
       clientiHtml +=
         '<div class="ledger-entity">' +
           '<div class="ledger-entity-head" style="cursor:default;">' +
             '<div><div class="en-name">' + escapeHtml(nome) + '</div>' +
-            '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata':' giornate') + ' &middot; ' + nPersoneGiorno + ' persone-giorno</div></div>' +
+            '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata':' giornate') + ' &middot; ' + nPersoneGiorno + ' persone-giorno' + subInc + '</div></div>' +
             '<div class="en-amt c">&euro; ' + eur(info.tot) + '</div>' +
           '</div>' +
-          '<div class="ledger-entity-body open">' + righeGiorni + '</div>' +
+          '<div class="ledger-entity-body open">' + righeGiorni + btnInc + '</div>' +
         '</div>';
     });
   }
@@ -1082,6 +1117,9 @@ function renderRiepilogo(){
       var subPagato = info.nonPagato>0
         ? ' &middot; <span style="color:var(--debit);">da pagare &euro; ' + eur(info.nonPagato) + '</span>'
         : ' &middot; <span style="color:var(--credit);">tutto pagato</span>';
+      var btnSaldo = (info.nonPagato>0 && RIEPILOGO_MESE!=="tutti")
+        ? '<button class="btn-saldo" data-saldo="' + escapeHtml(nome) + '">Segna tutto pagato &middot; &euro; ' + eur(info.nonPagato) + '</button>'
+        : '';
       personeHtml +=
         '<div class="ledger-entity">' +
           '<div class="ledger-entity-head" style="cursor:default;">' +
@@ -1089,7 +1127,7 @@ function renderRiepilogo(){
             '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata lavorata':' giornate lavorate') + ' &middot; ' + nomiClientiPersona.length + (nomiClientiPersona.length===1?' cliente':' clienti') + subPagato + '</div></div>' +
             '<div class="en-amt d">&euro; ' + eur(info.tot) + '</div>' +
           '</div>' +
-          '<div class="ledger-entity-body open">' + righeClienti + '</div>' +
+          '<div class="ledger-entity-body open">' + righeClienti + btnSaldo + '</div>' +
         '</div>';
     });
   }
@@ -1129,6 +1167,32 @@ function renderRiepilogo(){
     backupSection;
 
   on(document.getElementById("f-mese"), "change", function(e){ RIEPILOGO_MESE = e.target.value; renderRiepilogo(); });
+  document.querySelectorAll("[data-incasso]").forEach(function(b){
+    on(b, "click", function(){
+      var nome = b.dataset.incasso;
+      if(!confirm("Segnare come incassate tutte le giornate di " + nome + " in " + monthLabel(RIEPILOGO_MESE) + "?")) return;
+      giornate.forEach(function(g){
+        if(g.cliente===nome && monthKey(g.data)===RIEPILOGO_MESE){ g.incassato = true; }
+      });
+      saveData();
+      renderRiepilogo();
+      showToast("Incassato \u2713");
+    });
+  });
+  document.querySelectorAll("[data-saldo]").forEach(function(b){
+    on(b, "click", function(){
+      var nome = b.dataset.saldo;
+      if(!confirm("Segnare come pagate tutte le giornate di " + nome + " in " + monthLabel(RIEPILOGO_MESE) + "?")) return;
+      giornate.forEach(function(g){
+        if(monthKey(g.data)===RIEPILOGO_MESE){
+          (g.persone||[]).forEach(function(p){ if(p.nome===nome){ p.pagato = true; } });
+        }
+      });
+      saveData();
+      renderRiepilogo();
+      showToast("Saldato \u2713");
+    });
+  });
   wireBackupButtons();
 }
 
@@ -1229,7 +1293,7 @@ function renderCalendario(){
     on(b, "click", function(){
       var j = trova(b.dataset.reg); if(!j) return;
       editingId = null;
-      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formCarb = ""; formPasti = ""; formPagamento = "";
+      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formCarb = ""; formPasti = ""; formIncassato = false; formPagamento = "";
       formPersone = (j.persone||[]).map(function(n){ return {nome:n, costo:"", pagato:false}; });
       if(formPersone.length===0){ formPersone = [{nome:"", costo:"", pagato:false}]; }
       formDaProgramma = j.id;
