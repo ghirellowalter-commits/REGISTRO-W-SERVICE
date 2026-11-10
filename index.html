@@ -442,6 +442,7 @@ var formImporto = "";
 var formNote = "";
 var formCarb = "";
 var formPasti = "";
+var formFurg = "";
 var formIncassato = false;
 var formPagamento = "";
 
@@ -542,7 +543,7 @@ function listaPersoneStoriche(){
 }
 
 function totaliComplessiviHtml(){
-  var totCredit = 0, totDebit = 0, totNonPagato = 0, totSpese = 0, totCarb = 0, totPasti = 0, totInc = 0;
+  var totCredit = 0, totDebit = 0, totNonPagato = 0, totSpese = 0, totCarb = 0, totPasti = 0, totFurg = 0, totInc = 0;
   giornate.forEach(function(g){
     totCredit += (g.importoCliente||0);
     totDebit += giornoCosti(g);
@@ -551,6 +552,7 @@ function totaliComplessiviHtml(){
     totInc += giornoDaIncassare(g);
     totCarb += (g.carburante||0);
     totPasti += (g.pasti||0);
+    totFurg += (g.furgone||0);
   });
   var margine = totCredit - totDebit;
   return '<div class="totals-strip">' +
@@ -559,7 +561,7 @@ function totaliComplessiviHtml(){
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(totDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(totNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(margine) + '</div></div>' +
-      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(totSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(totCarb) + ' &middot; pasti &euro; ' + eur(totPasti) + '</div></div>' +
+      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(totSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(totCarb) + ' &middot; pasti &euro; ' + eur(totPasti) + ' &middot; furgone &euro; ' + eur(totFurg) + '</div></div>' +
     '</div>';
 }
 function renderTotalsStrip(){ $totalsWrap.innerHTML = ""; }
@@ -587,6 +589,7 @@ function resetForm(){
   formNote = "";
   formCarb = "";
   formPasti = "";
+  formFurg = "";
   formIncassato = false;
   formPagamento = "";
   formDaProgramma = null;
@@ -601,6 +604,7 @@ function loadGiornoIntoForm(g){
   formNote = g.note || "";
   formCarb = g.carburante ? String(g.carburante) : "";
   formPasti = g.pasti ? String(g.pasti) : "";
+  formFurg = g.furgone ? String(g.furgone) : "";
   formIncassato = !!g.incassato;
   formPagamento = g.pagamentoCliente || "";
   formPersone = (g.persone||[]).map(function(p){ return {nome:p.nome, costo:String(p.costo), pagato:!!p.pagato}; });
@@ -674,6 +678,8 @@ function renderNuova(){
       '<input type="number" inputmode="decimal" step="0.01" id="f-carb" placeholder="0.00" value="' + escapeHtml(formCarb) + '">' +
       '<label>Pasti (&euro;) &middot; spesa fuori margine</label>' +
       '<input type="number" inputmode="decimal" step="0.01" id="f-pasti" placeholder="0.00" value="' + escapeHtml(formPasti) + '">' +
+      '<label>Noleggio furgone (&euro;) &middot; spesa fuori margine</label>' +
+      '<input type="number" inputmode="decimal" step="0.01" id="f-furgone" placeholder="0.00" value="' + escapeHtml(formFurg) + '">' +
 
       '<label>Note (opzionale)</label>' +
       '<textarea id="f-note" placeholder="es. montaggio cucina, 2&deg; piano senza ascensore&hellip;">' + escapeHtml(formNote) + '</textarea>' +
@@ -690,6 +696,7 @@ function renderNuova(){
   on(document.getElementById("f-incassato"), "change", function(e){ formIncassato = e.target.checked; });
   on(document.getElementById("f-carb"), "input", function(e){ formCarb = e.target.value; });
   on(document.getElementById("f-pasti"), "input", function(e){ formPasti = e.target.value; });
+  on(document.getElementById("f-furgone"), "input", function(e){ formFurg = e.target.value; });
 
   document.querySelectorAll(".f-persona-nome").forEach(function(inp){
     on(inp, "input", function(){
@@ -759,7 +766,8 @@ function renderNuova(){
           incassato: !!formIncassato,
           carburante: parseFloat(formCarb) || 0,
           pasti: parseFloat(formPasti) || 0,
-          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
+          furgone: parseFloat(formFurg) || 0,
+          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0) + (parseFloat(formFurg) || 0),
           note: formNote || "",
           persone: persone
         };
@@ -775,7 +783,8 @@ function renderNuova(){
           incassato: !!formIncassato,
           carburante: parseFloat(formCarb) || 0,
           pasti: parseFloat(formPasti) || 0,
-          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0),
+          furgone: parseFloat(formFurg) || 0,
+          spese: (parseFloat(formCarb) || 0) + (parseFloat(formPasti) || 0) + (parseFloat(formFurg) || 0),
         note: formNote || "",
         persone: persone
       });
@@ -841,7 +850,7 @@ function renderGiornate(){
             '<button class="pay-toggle ' + (g.incassato ? "paid" : "unpaid") + '" data-inc-giorno="' + g.id + '">' + (g.incassato ? "Incassato" : "Da incassare") + '</button></span></div>' +
           '<div class="dline" style="font-weight:700;color:var(--ink);"><span>Totale squadra</span><span>&euro; ' + eur(costi) + '</span></div>' +
           (nonPagato>0 ? '<div class="dline" style="font-weight:700;color:var(--debit);"><span>Ancora da pagare</span><span>&euro; ' + eur(nonPagato) + '</span></div>' : '') +
-          (g.spese>0 ? '<div class="dline" style="color:var(--ink-soft);"><span>Spese fuori margine' + ((g.carburante||g.pasti) ? ' &middot; carburante &euro; ' + eur(g.carburante||0) + ' &middot; pasti &euro; ' + eur(g.pasti||0) : '') + '</span><span>&euro; ' + eur(g.spese) + '</span></div>' : '') +
+          (g.spese>0 ? '<div class="dline" style="color:var(--ink-soft);"><span>Spese fuori margine' + ((g.carburante||g.pasti||g.furgone) ? ' &middot; carburante &euro; ' + eur(g.carburante||0) + ' &middot; pasti &euro; ' + eur(g.pasti||0) + ' &middot; furgone &euro; ' + eur(g.furgone||0) : '') + '</span><span>&euro; ' + eur(g.spese) + '</span></div>' : '') +
           '<div class="giorno-actions">' +
             '<button class="btn-edit" data-edit="' + g.id + '">Modifica</button>' +
             '<button class="btn-del" data-del="' + g.id + '">Elimina</button>' +
@@ -1030,8 +1039,8 @@ function renderRiepilogo(){
   });
 
   // Totali del periodo filtrato
-  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0, periodoSpese = 0, periodoCarb = 0, periodoPasti = 0, periodoInc = 0;
-  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); periodoSpese += giornoSpese(g); periodoInc += giornoDaIncassare(g); periodoCarb += (g.carburante||0); periodoPasti += (g.pasti||0); });
+  var periodoCredit = 0, periodoDebit = 0, periodoNonPagato = 0, periodoSpese = 0, periodoCarb = 0, periodoPasti = 0, periodoFurg = 0, periodoInc = 0;
+  filtered.forEach(function(g){ periodoCredit += (g.importoCliente||0); periodoDebit += giornoCosti(g); periodoNonPagato += giornoNonPagato(g); periodoSpese += giornoSpese(g); periodoInc += giornoDaIncassare(g); periodoCarb += (g.carburante||0); periodoPasti += (g.pasti||0); periodoFurg += (g.furgone||0); });
   var periodoMargine = periodoCredit - periodoDebit;
 
   var periodoStrip =
@@ -1041,7 +1050,7 @@ function renderRiepilogo(){
       '<div class="tot-card debit"><div class="lbl">Alla squadra</div><div class="val">&euro; ' + eur(periodoDebit) + '</div></div>' +
       '<div class="tot-card debit"><div class="lbl">Da pagare</div><div class="val">&euro; ' + eur(periodoNonPagato) + '</div></div>' +
       '<div class="tot-card margin"><div class="lbl">Margine</div><div class="val">&euro; ' + eur(periodoMargine) + '</div></div>' +
-      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(periodoSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(periodoCarb) + ' &middot; pasti &euro; ' + eur(periodoPasti) + '</div></div>' +
+      '<div class="tot-card spese"><div class="lbl">Spese (a parte)</div><div class="val">&euro; ' + eur(periodoSpese) + '</div><div class="spese-sub">carburante &euro; ' + eur(periodoCarb) + ' &middot; pasti &euro; ' + eur(periodoPasti) + ' &middot; furgone &euro; ' + eur(periodoFurg) + '</div></div>' +
     '</div>';
 
   /* ---- SEZIONE CLIENTI ---- */
@@ -1293,7 +1302,7 @@ function renderCalendario(){
     on(b, "click", function(){
       var j = trova(b.dataset.reg); if(!j) return;
       editingId = null;
-      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formCarb = ""; formPasti = ""; formIncassato = false; formPagamento = "";
+      formData = j.data; formCliente = j.cliente; formImporto = ""; formNote = j.note || ""; formCarb = ""; formPasti = ""; formFurg = ""; formIncassato = false; formPagamento = "";
       formPersone = (j.persone||[]).map(function(n){ return {nome:n, costo:"", pagato:false}; });
       if(formPersone.length===0){ formPersone = [{nome:"", costo:"", pagato:false}]; }
       formDaProgramma = j.id;
@@ -1502,7 +1511,12 @@ if(errBanner){
   errBanner.addEventListener("click", function(){ errBanner.style.display = "none"; });
 }
 window.addEventListener("error", function(e){
-  reportError((e && e.error) ? e.error : (e && e.message ? e.message : "errore sconosciuto"));
+  if(e && e.message==="Script error." && !e.error && !e.lineno){
+    console.warn("Errore generico senza dettagli (ignorato):", e);
+    return;
+  }
+  if(e && e.error){ reportError(e.error); return; }
+  reportError({message:(e && e.message ? e.message : "errore sconosciuto") + (e && e.lineno ? " (riga " + e.lineno + ")" : "")});
 });
 window.addEventListener("unhandledrejection", function(e){
   reportError(e && e.reason ? e.reason : "operazione non riuscita");
