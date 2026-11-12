@@ -322,6 +322,7 @@
   .btn-saldo{ width:100%; margin-top:10px; border:none; border-radius:14px; padding:12px; background:var(--credit-bg); color:var(--credit); font-weight:600; font-size:14px; cursor:pointer; }
   .btn-saldo:active{ opacity:.8; }
   .badge-pag.inc{ background:var(--credit); color:#fff; }
+  .btn-costo{ width:100%; margin-top:8px; border:1px solid var(--rule); border-radius:14px; padding:12px; background:#fff; color:var(--ink); font-weight:600; font-size:14px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -1136,7 +1137,7 @@ function renderRiepilogo(){
             '<div class="en-sub">' + info.giornate.length + (info.giornate.length===1?' giornata lavorata':' giornate lavorate') + ' &middot; ' + nomiClientiPersona.length + (nomiClientiPersona.length===1?' cliente':' clienti') + subPagato + '</div></div>' +
             '<div class="en-amt d">&euro; ' + eur(info.tot) + '</div>' +
           '</div>' +
-          '<div class="ledger-entity-body open">' + righeClienti + btnSaldo + '</div>' +
+          '<div class="ledger-entity-body open">' + righeClienti + btnSaldo + '<button class="btn-costo" data-costo="' + escapeHtml(nome) + '">Cambia importo per tutte le giornate</button></div>' +
         '</div>';
     });
   }
@@ -1186,6 +1187,28 @@ function renderRiepilogo(){
       saveData();
       renderRiepilogo();
       showToast("Incassato \u2713");
+    });
+  });
+  document.querySelectorAll("[data-costo]").forEach(function(b){
+    on(b, "click", function(){
+      var nome = b.dataset.costo;
+      var tutti = RIEPILOGO_MESE==="tutti";
+      var periodo = tutti ? "tutti i periodi" : monthLabel(RIEPILOGO_MESE);
+      var target = giornate.filter(function(g){
+        return (tutti || monthKey(g.data)===RIEPILOGO_MESE) && (g.persone||[]).some(function(p){ return p.nome===nome; });
+      });
+      if(!target.length) return;
+      var r = window.prompt("Nuovo importo (\u20ac) per ogni giornata di " + nome + " in " + periodo + " (" + target.length + " giornate).\n\nScrivi 0 per non contarlo nei costi:", "0");
+      if(r===null) return;
+      var v = parseFloat(String(r).replace(",", "."));
+      if(isNaN(v) || v<0){ showToast("Importo non valido"); return; }
+      if(!confirm("Impostare \u20ac " + eur(v) + " a " + nome + " su " + target.length + " giornate (" + periodo + ")?\n\nGli importi attuali verranno sostituiti.")) return;
+      target.forEach(function(g){
+        (g.persone||[]).forEach(function(p){ if(p.nome===nome){ p.costo = v; } });
+      });
+      saveData();
+      renderRiepilogo();
+      showToast("Importi aggiornati \u2713");
     });
   });
   document.querySelectorAll("[data-saldo]").forEach(function(b){
