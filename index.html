@@ -343,6 +343,159 @@
   .pdf-row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
   .btn-pdf{ border:none; border-radius:14px; padding:13px 8px; background:var(--ink); color:#fff; font-weight:600; font-size:13.5px; cursor:pointer; box-shadow:0 6px 16px rgba(20,34,59,.18); }
   .btn-pdf.light{ background:#fff; color:var(--ink); border:1px solid var(--rule); box-shadow:none; }
+
+  /* ===== TEMA SCURO BLU NOTTE ===== */
+  :root{
+    color-scheme:dark;
+    --paper:#0A1222; --card:#111C33; --card2:#16233F;
+    --ink:#E8EEFA; --ink-soft:#8E9FBE;
+    --rule:#26365A; --rule-soft:#1C2A49;
+    --credit:#4FD1A1; --credit-bg:rgba(79,209,161,.14);
+    --debit:#FF7B72; --debit-bg:rgba(255,123,114,.14);
+    --brass:#F2C45A; --brass-bg:rgba(242,196,90,.14);
+    --accent:#5B8CFF; --accent2:#3E6BF0;
+    --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 10px 28px rgba(0,0,0,.35);
+  }
+  body{ background:radial-gradient(900px 420px at 50% -120px,#18305F 0%,rgba(24,48,95,0) 70%),var(--paper); color:var(--ink); }
+  header.top{ background:linear-gradient(180deg,#16284D 0%,#0E1A33 100%); box-shadow:0 14px 40px rgba(0,0,0,.45); border-bottom:1px solid rgba(255,255,255,.06); padding-bottom:22px; }
+  header.top .hin{ gap:16px; }
+  header.top .hin img{ height:68px; filter:drop-shadow(0 0 16px rgba(110,160,255,.45)); }
+  header.top .eyebrow{ color:#7F95BC; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  header.top h1{ color:#fff; font-size:24px; }
+  h2.section-title{ color:var(--ink); }
+  label,.sub-title{ color:var(--ink-soft); }
+  input[type=text],input[type=number],input[type=date],input[type=time],textarea,select{ background:var(--card2); color:var(--ink); border:1px solid var(--rule); box-shadow:none; }
+  select{ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%238E9FBE' stroke-width='1.8' fill='none' stroke-linecap='round'/></svg>"); }
+  input::placeholder,textarea::placeholder{ color:#5C6E92; }
+  input:focus,textarea:focus,select:focus{ border-color:var(--accent); box-shadow:0 0 0 4px rgba(91,140,255,.18); }
+  .btn-primary,.btn-pdf{ background:linear-gradient(180deg,var(--accent),var(--accent2)); color:#fff; box-shadow:0 10px 24px rgba(62,107,240,.35); }
+  .btn-secondary,.btn-cancel,.btn-costo,.btn-pdf.light{ background:var(--card2); color:var(--ink); border:1px solid var(--rule); box-shadow:none; }
+  .giorno-card,.ledger-entity,.prog-card,.tot-card,.az-card,.card{ background:var(--card); border:1px solid rgba(255,255,255,.06); box-shadow:var(--shadow); }
+  .prog-card{ border-left:3px solid var(--accent); }
+  .tot-card .val,.saldo-row b{ color:var(--ink); }
+  .tot-card.credit .val,.saldo-row .ok b{ color:var(--credit); }
+  .tot-card.debit .val,.saldo-row .no b{ color:var(--debit); }
+  .tot-card.margin .val{ color:var(--brass); }
+  .saldo-row div{ background:var(--card2); }
+  .giorno-day{ background:rgba(91,140,255,.16); color:#A9C3FF; border-radius:12px; }
+  .view-toggle button.active{ background:var(--accent); color:#fff; }
+  .pay-toggle{ background:transparent; }
+  .badge-pag.inc{ background:var(--credit); color:#06231A; }
+  .toast{ background:#E8EEFA; color:#0A1222; }
+  .cal-nav button{ background:var(--card); color:var(--ink); border:1px solid rgba(255,255,255,.06); }
+  .cal-day{ background:var(--card); border:1px solid rgba(255,255,255,.05); color:var(--ink); box-shadow:none; }
+  .cal-day.today{ border-color:var(--accent); color:#9DBBFF; }
+  .cal-day.sel{ background:linear-gradient(180deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent; box-shadow:0 8px 20px rgba(62,107,240,.4); }
+  .cal-dot{ font-size:0; min-width:0; width:6px; height:6px; padding:0; left:50%; right:auto; bottom:6px; transform:translateX(-50%); background:var(--accent); }
+  .cal-day.sel .cal-dot{ background:#fff; }
+  nav.tabbar{ background:rgba(17,28,51,.82); border:1px solid rgba(255,255,255,.08); box-shadow:0 14px 40px rgba(0,0,0,.55); }
+  nav.tabbar button{ color:var(--ink-soft); background:transparent; }
+  nav.tabbar button.active{ background:rgba(91,140,255,.16); color:#9DBBFF; }
+  nav.tabbar .ic{ display:flex; justify-content:center; margin-bottom:3px; }
+  nav.tabbar .ic svg{ width:22px; height:22px; }
+  .sq-addbtn{ background:var(--accent); }
+  .bar{ background:var(--rule-soft); }
+  .btn-saldo{ background:var(--credit-bg); color:var(--credit); }
+  select{ background-repeat:no-repeat; background-position:right 14px center; padding-right:38px; }
+  .btn-edit{ background:var(--card2); color:var(--ink); border:1px solid var(--rule); }
+  .btn-edit:first-child:not(:last-child){ background:rgba(91,140,255,.16); color:#9DBBFF; border-color:rgba(91,140,255,.35); }
+  .btn-del{ background:var(--debit-bg); color:var(--debit); border:1px solid transparent; }
+  .dline{ align-items:center; gap:10px; }
+  .dline > span:last-child{ white-space:nowrap; }
+  .toast{ top:auto; bottom:calc(102px + env(safe-area-inset-bottom,0px)); }
+  input[type=checkbox]{ accent-color:var(--accent); }
+  .az-val{ word-break:normal; overflow-wrap:anywhere; }
+  .az-copy{ background:rgba(91,140,255,.16); color:#9DBBFF; }
+
+  /* ===== BLUEPRINT: STILE DAL LOGO (metro pieghevole, disegno tecnico) ===== */
+  :root{
+    --bg:#14223B; --line:rgba(240,244,250,.34); --line2:rgba(240,244,250,.16);
+    --paper:#14223B; --card:#182848; --card2:#1D3059;
+    --ink:#F0F4FA; --ink-soft:#9FB1D1; --rule:rgba(240,244,250,.30); --rule-soft:rgba(240,244,250,.14);
+    --credit:#7DE3BE; --credit-bg:rgba(125,227,190,.12); --debit:#FF8F86; --debit-bg:rgba(255,143,134,.12);
+    --brass:#F5CD6B; --brass-bg:rgba(245,205,107,.12); --accent:#F0F4FA; --accent2:#DCE5F5; --shadow:none;
+    --font-display:"DIN Condensed","Avenir Next Condensed","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  body{ background-color:var(--bg); color:var(--ink);
+    background-image:linear-gradient(rgba(240,244,250,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(240,244,250,.075) 1px,transparent 1px),linear-gradient(rgba(240,244,250,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(240,244,250,.035) 1px,transparent 1px);
+    background-size:96px 96px,96px 96px,24px 24px,24px 24px; }
+  header.top{ background:transparent; box-shadow:none; border:none; border-radius:0; margin:0; padding:calc(14px + env(safe-area-inset-top,0px)) 16px 0; }
+  header.top .hin{ max-width:520px; margin:0 auto; border:1px solid var(--line); background:rgba(20,34,59,.92); padding:12px 16px; gap:16px; position:relative; }
+  header.top .hin::before,header.top .hin::after{ content:""; position:absolute; top:6px; width:5px; height:5px; border-radius:50%; border:1px solid var(--line); }
+  header.top .hin::before{ left:6px; } header.top .hin::after{ right:6px; }
+  header.top .hin img{ height:58px; filter:none; }
+  header.top .eyebrow{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); }
+  header.top h1{ font-family:var(--font-display); font-size:27px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); margin-top:2px; }
+  .ruler{ max-width:520px; height:13px; margin:7px auto 0; opacity:.7;
+    background-image:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 8px),repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 40px);
+    background-size:100% 6px,100% 13px; background-repeat:no-repeat; }
+  h2.section-title{ display:flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:16px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); margin:28px 0 12px; }
+  h2.section-title::after{ content:""; flex:1; height:6px; background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 7px); }
+  h2.section-title .count{ order:2; background:transparent; border:1px solid var(--line); border-radius:2px; font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; padding:1px 6px; color:var(--ink-soft); }
+  .sub-title{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); }
+  label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:500; }
+  .chk-row,.persona-pagato{ font-family:inherit; text-transform:none; letter-spacing:0; font-size:15px; color:var(--ink); }
+  input[type=text],input[type=number],input[type=date],input[type=time],textarea,select{ border-radius:0; background-color:rgba(240,244,250,.05); border:0; border-bottom:1px solid var(--ink); color:var(--ink); padding:12px 10px; font-family:var(--font-mono); font-size:15px; box-shadow:none; }
+  input:focus,textarea:focus,select:focus{ outline:none; background-color:rgba(240,244,250,.11); box-shadow:inset 0 -2px 0 var(--ink); border-bottom-color:var(--ink); }
+  .giorno-card,.ledger-entity,.prog-card,.tot-card,.az-card,.card{ border-radius:2px; background:var(--card); border:1px solid var(--line); box-shadow:none; position:relative; }
+  .prog-card{ border-left:1px solid var(--line); }
+  .giorno-card::before,.ledger-entity::before,.prog-card::before,.tot-card::before,.giorno-card::after,.ledger-entity::after,.prog-card::after,.tot-card::after{ content:""; position:absolute; top:5px; width:5px; height:5px; border-radius:50%; border:1px solid var(--line); pointer-events:none; }
+  .giorno-card::before,.ledger-entity::before,.prog-card::before,.tot-card::before{ left:5px; }
+  .giorno-card::after,.ledger-entity::after,.prog-card::after,.tot-card::after{ right:5px; }
+  .tot-card{ padding:16px 16px 14px; }
+  .tot-card .lbl{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+  .tot-card .val{ font-family:var(--font-mono); font-size:19px; font-weight:600; letter-spacing:-.02em; }
+  .giorno-info .cli,.prog-card .cli,.ledger-entity-head .en-name{ font-family:var(--font-display); text-transform:uppercase; letter-spacing:.06em; font-weight:600; font-size:18px; }
+  .imp,.margine,.eamt,.en-amt,.saldo-row b,.dline > span:last-child,.eline > span:last-child{ font-family:var(--font-mono); }
+  .dline > span:first-child,.eline > .d1{ flex:1; display:flex; align-items:baseline; min-width:0; }
+  .dline > span:first-child::after,.eline > .d1::after{ content:""; flex:1; min-width:14px; border-bottom:1px dotted var(--line); margin:0 8px; transform:translateY(-3px); }
+  .giorno-day{ border-radius:2px; background:transparent; border:1px solid var(--ink); color:var(--ink); font-family:var(--font-mono); }
+  .giorno-detail,.ledger-entity-body{ border-top:1px dashed var(--line); }
+  .saldo-row div{ border-radius:0; background:transparent; border:1px solid var(--line2); }
+  .bar{ height:5px; border-radius:0; background:rgba(240,244,250,.12); }
+  .bar i{ border-radius:0; background:var(--credit); }
+  .ledger-entity-head::after{ content:"+"; font-family:var(--font-mono); font-size:20px; transform:none; }
+  .ledger-entity.aperto .ledger-entity-head::after{ content:"\2212"; transform:none; }
+  .btn-primary,.btn-pdf{ border-radius:2px; border:1px solid var(--ink); background-color:var(--ink); color:#14223B; text-transform:uppercase; letter-spacing:.16em; font-family:var(--font-display); font-size:16px; font-weight:700; box-shadow:none;
+    background-image:radial-gradient(circle at 14px 50%,rgba(20,34,59,.5) 2.5px,transparent 3px),radial-gradient(circle at calc(100% - 14px) 50%,rgba(20,34,59,.5) 2.5px,transparent 3px); }
+  .btn-secondary,.btn-cancel,.btn-costo,.btn-pdf.light,.btn-edit,.btn-del,.btn-saldo,.az-copy{ border-radius:2px; background:transparent; background-image:none; color:var(--ink); border:1px solid var(--line); text-transform:uppercase; letter-spacing:.1em; font-family:var(--font-mono); font-size:11.5px; font-weight:600; box-shadow:none; }
+  .btn-edit:first-child:not(:last-child){ background:transparent; color:var(--ink); border-color:var(--ink); }
+  .btn-del{ color:var(--debit); border-color:rgba(255,143,134,.55); }
+  .btn-saldo{ color:var(--credit); border-color:var(--credit); }
+  .sq-addbtn{ border-radius:2px; background:var(--ink); color:#14223B; text-transform:uppercase; letter-spacing:.1em; font-family:var(--font-mono); font-size:12px; }
+  .st,.badge-pag,.prog-tag,.pay-toggle{ border-radius:2px; background:transparent; border:1px solid currentColor; text-transform:uppercase; letter-spacing:.08em; font-family:var(--font-mono); font-size:10px; font-weight:600; }
+  .st.ok,.pay-toggle.paid{ color:var(--credit); } .st.no,.pay-toggle.unpaid{ color:var(--debit); }
+  .badge-pag.cash{ color:var(--brass); } .badge-pag.fattura{ color:var(--ink); }
+  .badge-pag.inc{ background:var(--credit); color:#0B2A1F; border-color:var(--credit); }
+  .prog-tag{ color:var(--credit); }
+  .pay-rm,.sq-rm,.az-rm{ border-radius:2px; background:transparent; border:1px solid rgba(255,143,134,.5); color:var(--debit); }
+  .toast{ border-radius:2px; background:var(--ink); color:#14223B; font-family:var(--font-mono); font-size:12px; letter-spacing:.04em; box-shadow:none; }
+  .cal-nav button{ border-radius:0; background:transparent; border:1px solid var(--line); box-shadow:none; color:var(--ink); }
+  .cal-mese{ font-family:var(--font-display); text-transform:uppercase; letter-spacing:.16em; font-size:18px; font-weight:600; }
+  .cal-grid{ gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  .cal-dow{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.1em; padding:7px 0; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(240,244,250,.05); }
+  .cal-day{ border-radius:0; border:0; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(20,34,59,.85); box-shadow:none; color:var(--ink); font-family:var(--font-mono); font-size:14px; }
+  .cal-day.today{ outline:1px dashed var(--ink); outline-offset:-5px; font-weight:700; color:var(--ink); }
+  .cal-day.sel{ background:var(--ink); color:#14223B; box-shadow:none; }
+  .cal-dot{ left:50%; right:auto; transform:translateX(-50%); bottom:6px; width:14px; height:2px; border-radius:0; background:var(--ink); }
+  .cal-day.sel .cal-dot{ background:#14223B; }
+  nav.tabbar{ left:0; right:0; bottom:0; max-width:none; border-radius:0; border:none; border-top:1px solid var(--line); background:rgba(20,34,59,.97); -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none; padding:12px 6px calc(8px + env(safe-area-inset-bottom,0px)); gap:0; }
+  nav.tabbar::before{ content:""; position:absolute; left:0; right:0; top:-7px; height:6px; opacity:.55; background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 8px); }
+  nav.tabbar button{ border-radius:0; position:relative; background:transparent; color:var(--ink-soft); font-family:var(--font-mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; font-weight:500; }
+  nav.tabbar button.active{ background:transparent; color:var(--ink); }
+  nav.tabbar button.active::before{ content:""; position:absolute; top:-18px; left:50%; margin-left:-6px; border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid var(--ink); }
+  nav.tabbar .ic svg{ stroke-width:1.5; }
+  .az-card{ overflow:hidden; } .az-row{ border-bottom:1px dashed var(--line2); }
+  .az-lbl{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  .az-val{ font-family:var(--font-mono); font-size:15px; font-weight:600; }
+  select{ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23F0F4FA' stroke-width='1.6' fill='none'/></svg>"); background-repeat:no-repeat; background-position:right 12px center; padding-right:36px; }
+  header.top h1{ font-size:23px; letter-spacing:.07em; }
+  .giorno-actions button{ border-radius:2px; }
+  .giorno-info .cli{ white-space:normal; overflow:visible; text-overflow:clip; font-size:17px; letter-spacing:.04em; line-height:1.15; }
+  .dline > span:first-child::after,.eline > .d1::after{ min-width:6px; }
+  .pdf-row .btn-pdf{ border-radius:2px; }
+  .btn-pdf{ font-size:13px; letter-spacing:.1em; padding:14px 6px; }
 </style>
 </head>
 <body>
@@ -355,6 +508,7 @@
       <h1>Registro Giornate</h1>
     </div>
   </div>
+  <div class="ruler"></div>
 </header>
 
 <div id="error-banner" class="wrap"></div>
@@ -363,11 +517,11 @@
 <div class="toast" id="toast"></div>
 
 <nav class="tabbar">
-  <button data-tab="calendario"><span class="ic">&#128197;</span>Calendario</button>
-  <button data-tab="nuova"><span class="ic">&#9998;</span>Nuova</button>
-  <button data-tab="giornate"><span class="ic">&#9638;</span>Giornate</button>
-  <button data-tab="riepilogo"><span class="ic">&Sigma;</span>Riepilogo</button>
-  <button data-tab="azienda"><span class="ic">&#127970;</span>Azienda</button>
+  <button data-tab="calendario"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></span>Calendario</button>
+  <button data-tab="nuova"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg></span>Nuova</button>
+  <button data-tab="giornate"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6.5h12M8 12h12M8 17.5h12"/><circle cx="4" cy="6.5" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="17.5" r="1"/></svg></span>Giornate</button>
+  <button data-tab="riepilogo"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-7"/></svg></span>Riepilogo</button>
+  <button data-tab="azienda"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 13h17"/></svg></span>Azienda</button>
 </nav>
 
 <script>
